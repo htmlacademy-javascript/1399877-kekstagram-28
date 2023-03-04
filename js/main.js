@@ -1,20 +1,19 @@
-const NAMES_ARRAY = [
+const NAMES = [
   'Андрей','Мария',
   'Станислав',
   'Олег'
 ];
-const COMMENTS_ARRAY = [
+const COMMENTS = [
   'Всё отлично!',
   'В целом всё неплохо. Но не всё. Когда вы делаете фотографию, хорошо бы убирать палец из кадра.',
   'Моя бабушка случайно чихнула с фотоаппаратом в руках и у неё получилась фотография лучше.'
 ];
-const DESCRIPTION = [
+const DESCRIPTIONS = [
   'Это мяч',
   'Коты наше все',
   'Анапа 2008',
   '#Я в коридоре на Балли'
 ];
-const OBJ = [];
 const getRandomPositiveInteger = (a, b) =>{
   const lower = Math.ceil(Math.min(a, b));
   const upper = Math.floor(Math.max(a, b));
@@ -28,26 +27,29 @@ const createIdGenerator = () => {
     return lastGeneratedId;
   };
 };
-const randomIdNumber = createIdGenerator();
-const randomUrlNumber = createIdGenerator();
-const createObj = () => {
-  const randomDescriptionIndex = getRandomPositiveInteger(0, DESCRIPTION.length - 1);
-  const randomCounterLikes = getRandomPositiveInteger(15,200);
-  const randomCommentsIndex = getRandomPositiveInteger(0,COMMENTS_ARRAY.length - 1);
-  const randomNameIndex = getRandomPositiveInteger(0,NAMES_ARRAY.length - 1);
-  return {
-    description: DESCRIPTION[randomDescriptionIndex],
-    likes: randomCounterLikes,
-    comments: COMMENTS_ARRAY[randomCommentsIndex],
-    name: NAMES_ARRAY[randomNameIndex],
-  };
-};
 
-const saveValueIndexObj = () =>{
+
+const getRandomArrayElement = (array) => array[getRandomPositiveInteger(0, array.length - 1)];
+
+const createComments = () =>({
+  id: getRandomPositiveInteger(15,200),
+  avatar: `img/avatar-${getRandomPositiveInteger(0, 6)}.svg`,
+  message: getRandomArrayElement(COMMENTS),
+  name: getRandomArrayElement(NAMES),
+});
+const createObj = () =>{
+  const randomIdNumber = createIdGenerator();
+  const randomUrlNumber = createIdGenerator();
+  const OBJ = [];
   for(let i = 0; i < 25; i++){
-    OBJ[i] = createObj();
+    OBJ[i] = {};
+    OBJ[i].description = getRandomArrayElement(DESCRIPTIONS);
+    OBJ[i].comments = createComments();
     OBJ[i].id = randomIdNumber();
     OBJ[i].url = `photo/${randomUrlNumber()}.jpg`;
+    OBJ[i].likes = getRandomPositiveInteger(15,200);
+    OBJ[i].name = getRandomArrayElement(NAMES);
   }
+  return OBJ;
 };
-saveValueIndexObj();
+createObj();
