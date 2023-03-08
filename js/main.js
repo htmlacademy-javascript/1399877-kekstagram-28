@@ -14,6 +14,7 @@ const DESCRIPTIONS = [
   'Анапа 2008',
   '#Я в коридоре на Балли'
 ];
+const COMMENTS_COUNT = 3;
 const getRandomPositiveInteger = (a, b) =>{
   const lower = Math.ceil(Math.min(a, b));
   const upper = Math.floor(Math.max(a, b));
@@ -30,26 +31,26 @@ const createIdGenerator = () => {
 
 
 const getRandomArrayElement = (array) => array[getRandomPositiveInteger(0, array.length - 1)];
+const getCommentId = createIdGenerator();
 
-const createComments = () =>({
-  id: getRandomPositiveInteger(15,200),
+const createComments = () => Array.from({length: COMMENTS_COUNT},() => ({
+  id: getCommentId(),
   avatar: `img/avatar-${getRandomPositiveInteger(0, 6)}.svg`,
   message: getRandomArrayElement(COMMENTS),
   name: getRandomArrayElement(NAMES),
-});
-const createObj = () =>{
-  const randomIdNumber = createIdGenerator();
-  const randomUrlNumber = createIdGenerator();
-  const OBJ = [];
+}));
+const createPhotos = () =>{
+  const getRandomIdNumber = createIdGenerator();
+  const getRandomUrlNumber = createIdGenerator();
+  const photos = [];
   for(let i = 0; i < 25; i++){
-    OBJ[i] = {};
-    OBJ[i].description = getRandomArrayElement(DESCRIPTIONS);
-    OBJ[i].comments = createComments();
-    OBJ[i].id = randomIdNumber();
-    OBJ[i].url = `photo/${randomUrlNumber()}.jpg`;
-    OBJ[i].likes = getRandomPositiveInteger(15,200);
-    OBJ[i].name = getRandomArrayElement(NAMES);
+    photos[i] = {};
+    photos[i].description = getRandomArrayElement(DESCRIPTIONS);
+    photos[i].comments = createComments();
+    photos[i].id = getRandomIdNumber();
+    photos[i].url = `photo/${getRandomUrlNumber()}.jpg`;
+    photos[i].likes = getRandomPositiveInteger(15,200);
   }
-  return OBJ;
+  return photos;
 };
-createObj();
+createPhotos();
