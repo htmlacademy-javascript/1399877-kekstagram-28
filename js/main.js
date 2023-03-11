@@ -1,1 +1,3 @@
-import './createObject.js';
+import {createPhotos} from './mockPhotos.js';
+createPhotos();
+

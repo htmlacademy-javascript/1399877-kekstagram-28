@@ -11,5 +11,5 @@ const createIdGenerator = () => {
     return lastGeneratedId;
   };
 };
-const getCommentId = createIdGenerator();
-export{getRandomPositiveInteger,createIdGenerator, getCommentId};
+const getRandomArrayElement = (array) => array[getRandomPositiveInteger(0, array.length - 1)];
+export{getRandomPositiveInteger,createIdGenerator, getRandomArrayElement};

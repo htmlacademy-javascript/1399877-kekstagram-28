@@ -1,4 +1,3 @@
-import{getRandomPositiveInteger} from './utils.js';
 const NAMES = [
   'Андрей','Мария',
   'Станислав',
@@ -16,5 +15,5 @@ const DESCRIPTIONS = [
   '#Я в коридоре на Балли'
 ];
 const COMMENTS_COUNT = 3;
-const getRandomArrayElement = (array) => array[getRandomPositiveInteger(0, array.length - 1)];
-export{NAMES,COMMENTS,DESCRIPTIONS,COMMENTS_COUNT,getRandomArrayElement};
+
+export{NAMES,COMMENTS,DESCRIPTIONS,COMMENTS_COUNT};

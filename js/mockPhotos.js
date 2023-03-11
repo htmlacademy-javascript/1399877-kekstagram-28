@@ -1,11 +1,13 @@
-import {NAMES,COMMENTS,DESCRIPTIONS,COMMENTS_COUNT,getRandomArrayElement} from './data.js';
-import {getRandomPositiveInteger, getCommentId, createIdGenerator} from './utils.js';
+import {NAMES,COMMENTS,DESCRIPTIONS,COMMENTS_COUNT} from './data.js';
+import {getRandomPositiveInteger, createIdGenerator,getRandomArrayElement} from './utils.js';
+const getCommentId = createIdGenerator();
 const createComments = () => Array.from({length: COMMENTS_COUNT},() => ({
   id: getCommentId(),
   avatar: `img/avatar-${getRandomPositiveInteger(0, 6)}.svg`,
   message: getRandomArrayElement(COMMENTS),
   name: getRandomArrayElement(NAMES),
 }));
+
 const createPhotos = () =>{
   const getRandomIdNumber = createIdGenerator();
   const getRandomUrlNumber = createIdGenerator();
@@ -20,4 +22,4 @@ const createPhotos = () =>{
   }
   return photos;
 };
-createPhotos();
+export {createPhotos};
