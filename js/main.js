@@ -1,3 +1,4 @@
-import {createPhotos} from './mockPhotos.js';
-createPhotos();
+import './mockPhotos.js';
+import './renderingPicture.js';
+
 

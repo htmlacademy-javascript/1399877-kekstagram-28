@@ -17,7 +17,7 @@ const createPhotos = () =>{
     photos[i].description = getRandomArrayElement(DESCRIPTIONS);
     photos[i].comments = createComments();
     photos[i].id = getRandomIdNumber();
-    photos[i].url = `photo/${getRandomUrlNumber()}.jpg`;
+    photos[i].url = `photos/${getRandomUrlNumber()}.jpg`;
     photos[i].likes = getRandomPositiveInteger(15,200);
   }
   return photos;
