@@ -1,3 +1,5 @@
 import {createPhotos} from './mockPhotos.js';
-createPhotos();
+import {renderPhotos} from './renderingPicture.js';
 
+const photos = createPhotos();
+renderPhotos(photos);
