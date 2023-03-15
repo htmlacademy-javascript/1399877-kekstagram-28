@@ -1,4 +1,5 @@
-import './mockPhotos.js';
-import './renderingPicture.js';
+import {createPhotos} from './mockPhotos.js';
+import {renderPhotos} from './renderingPicture.js';
 
-
+const photos = createPhotos();
+renderPhotos(photos);

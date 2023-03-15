@@ -1,37 +1,24 @@
-import {createPhotos} from './mockPhotos.js';
+const samplePicture = document.querySelector('#picture').content.cloneNode(true);
+const picturesContainer = document.querySelector('.pictures');
 
-const dataCreatePicture = createPhotos();
-const SAMPLE = document.querySelector('#picture').content.cloneNode(true);
-const PICTURES = document.querySelector('.pictures');
-const fragment = document.createDocumentFragment();
 
-const createPictures = (data, sample) =>{
-  const sampleClone = sample.cloneNode(true);
+const createPicture = (data) =>{
+  const sampleClone = samplePicture.cloneNode(true);
   const randomPhoto = sampleClone.querySelector('.picture__img');
-  randomPhoto.srс = data.url;
+  randomPhoto.src = data.url;
   randomPhoto.alt = data.description;
-  const likes = sampleClone.querySelector('.picture__likes');
-  likes.textContent = data.likes;
-  const comments = sampleClone.querySelector('.picture__comments');
-  comments.textContent = data.comments.length;
-  fragment.appendChild(sampleClone);
-  PICTURES.appendChild(fragment);
+  sampleClone.querySelector('.picture__likes').textContent = data.likes;
+  sampleClone.querySelector('.picture__comments').textContent = data.comments.length;
+  return sampleClone;
 };
-for(let i = 0; i < dataCreatePicture.length ; i++){
-  createPictures(dataCreatePicture[i],SAMPLE);
-}
 
-export {dataCreatePicture};
 
-// Отобразить фотографии других пользователей.
+const renderPhotos = (photos) => {
+  const fragment = document.createDocumentFragment();
 
-// Заведите модуль, который будет отвечать за отрисовку миниатюр.
+  photos.forEach((photo) => fragment.appendChild(createPicture(photo)));
 
-// На основе временных данных для разработки и шаблона #picture создайте DOM-элементы, соответствующие фотографиям, и заполните их данными:
+  picturesContainer.appendChild(fragment);
+};
 
-// Адрес изображения url подставьте как атрибут src изображения.
-// Количество лайков likes выведите в блок .picture__likes.
-// Количество комментариев comments выведите в блок .picture__comments.
-// Отрисуйте сгенерированные DOM-элементы в блок .pictures. Для вставки элементов используйте DocumentFragment.
-
-// Подключите модуль в проект.
+export {renderPhotos};
