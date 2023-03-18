@@ -3,7 +3,7 @@ import {getRandomPositiveInteger, createIdGenerator,getRandomArrayElement} from 
 const getCommentId = createIdGenerator();
 const createComments = () => Array.from({length: COMMENTS_COUNT},() => ({
   id: getCommentId(),
-  avatar: `img/avatar-${getRandomPositiveInteger(0, 6)}.svg`,
+  avatar: `img/avatar-${getRandomPositiveInteger(1, 6)}.svg`,
   message: getRandomArrayElement(COMMENTS),
   name: getRandomArrayElement(NAMES),
 }));

@@ -9,6 +9,7 @@ const createPicture = (data) =>{
   randomPhoto.alt = data.description;
   sampleClone.querySelector('.picture__likes').textContent = data.likes;
   sampleClone.querySelector('.picture__comments').textContent = data.comments.length;
+  randomPhoto.dataset.indexId = data.id;
   return sampleClone;
 };
 
@@ -21,4 +22,4 @@ const renderPhotos = (photos) => {
   picturesContainer.appendChild(fragment);
 };
 
-export {renderPhotos};
+export {renderPhotos, picturesContainer};
