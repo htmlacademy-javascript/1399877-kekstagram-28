@@ -19,7 +19,16 @@ const addClass = ()=>{
   commentsLoader.classList.add('hidden');
 };
 
-const closePopup = ()=>{
+const hidePopup = (e) => {
+  if (e.key && e.key !== 'Escape') {
+    return;
+  }
+  e.preventDefault();
+  displayingWindow.classList.add('hidden');
+  closeBigPhoto.removeEventListener('click', hidePopup);
+  document.removeEventListener('keydown', hidePopup);
+  document.body.classList.remove('modal-open');
+};
   event.preventDefault();
   displayingWindow.classList.add('hidden');
   closeBigPhoto.removeEventListener('click',closePopup);
