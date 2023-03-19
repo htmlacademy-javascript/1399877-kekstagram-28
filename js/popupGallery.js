@@ -5,70 +5,68 @@ const closeBigPhoto = displayingWindow.querySelector('.big-picture__cancel');
 const bigPicture = displayingWindow.querySelector('.big-picture__img img');
 const likesCounter = displayingWindow.querySelector('.likes-count');
 const commentCount = displayingWindow.querySelector('.comments-count');
-const commentsList = displayingWindow.querySelectorAll('.social__comments li');
+const commentsList = displayingWindow.querySelector('.social__comments');
+const commentTemplate = displayingWindow.querySelector('.social__comment').cloneNode(true);
+
+let photos = [];
+
 const descriptionPhoto = displayingWindow.querySelector('.social__caption');
 
-const addClass = ()=>{
-  const socialCommentCount = displayingWindow.querySelector('.social__comment-count');
-  const commentsLoader = displayingWindow.querySelector('.comments-loader');
-  document.querySelector('body').classList.add('modal-open');
-  socialCommentCount.classList.add('hidden');
-  commentsLoader.classList.add('hidden');
-};
 
-const closePopup = ()=>{
-  event.preventDefault();
-  displayingWindow.classList.add('hidden');
-  closeBigPhoto.removeEventListener('click',closePopup);
-};
-const closePopupKey = ()=>{
-  event.preventDefault();
-  if(event.key === 'Escape'){
-    displayingWindow.classList.add('hidden');
-    closeBigPhoto.removeEventListener('click', closePopup);
-    document.addEventListener('keydown',closePopupKey);
-  }
-};
-const showPopup = ()=>{
-  event.preventDefault();
-  const thumbnail = event.target.closest('[data-index-id]');
-  if (!thumbnail){
+const hidePopup = (e) => {
+  if (e.key && e.key !== 'Escape') {
     return;
   }
-  displayingWindow.classList.remove('hidden');
-  addClass();
-  closeBigPhoto.addEventListener('click',closePopup);
-  document.addEventListener('keydown',closePopupKey);
-  bigPicture.src = event.target.src;
-  closePopupKey();
-  return thumbnail.dataset.indexId;
+  e.preventDefault();
+  displayingWindow.classList.add('hidden');
+  closeBigPhoto.removeEventListener('click', hidePopup);
+  document.removeEventListener('keydown', hidePopup);
+  document.body.classList.remove('modal-open');
 };
-const addComments = (indexArray) =>{
-  for(let i = 0; i < commentsList.length; i++){
-    const img = commentsList[i].querySelector('img');
-    img.src = indexArray.comments[i].avatar;
-    img.alt = indexArray.comments[i].name;
-    commentsList[i].querySelector('p').textContent = indexArray.comments[i].message;
+
+const addComments = (comments) => {
+  displayingWindow.querySelector('.social__comment-count').classList.add('hidden');
+  displayingWindow.querySelector('.comments-loader').classList.add('hidden');
+  commentsList.innerHTML = '';
+  commentCount.textContent = comments.length;
+
+  const commentsFragment = document.createDocumentFragment();
+  comments.forEach((comment) => {
+    const commentClone = commentTemplate.cloneNode(true);
+    const img = commentClone.querySelector('img');
+    img.src = comment.avatar;
+    img.alt = comment.name;
+    commentClone.querySelector('p').textContent = comment.message;
+    commentsFragment.append(commentClone);
+  });
+  commentsList.append(commentsFragment);
+};
+const setPhotoData = (photo) => {
+  bigPicture.src = photo.url;
+  likesCounter.textContent = photo.likes;
+  descriptionPhoto.textContent = photo.description;
+  addComments(photo.comments);
+};
+const showPopup = (event) => {
+  event.preventDefault();
+  const photoId = parseInt(event.target.closest('[data-id]')?.dataset.id, 10);
+  if (!photoId) {
+    return;
   }
-
-};
-const appendData = (array,id) =>{
-  array.forEach((element) => {
-    if(+id === element.id){
-      likesCounter.textContent = element.likes;
-      commentCount.textContent = element.comments.length;
-      addComments(element);
-      descriptionPhoto.textContent = element.description;
-    }
-  });
+  const photoData = photos.find((photo) => photo.id === photoId);
+  if (!photoData) {
+    return;
+  }
+  setPhotoData(photoData);
+  displayingWindow.classList.remove('hidden');
+  closeBigPhoto.addEventListener('click', hidePopup);
+  document.addEventListener('keydown', hidePopup);
+  document.body.classList.add('modal-open');
 };
 
-const addHandler = (data) =>{
-  const dataProperties = data;
-  picturesContainer.addEventListener('click', ()=>{
-    const indexId = showPopup();
-    appendData(dataProperties,indexId);
-  });
-
+const setPhotos = (data) => {
+  photos = data;
 };
-export { addHandler };
+
+picturesContainer.addEventListener('click', showPopup);
+export { setPhotos };

@@ -9,7 +9,7 @@ const createPicture = (data) =>{
   randomPhoto.alt = data.description;
   sampleClone.querySelector('.picture__likes').textContent = data.likes;
   sampleClone.querySelector('.picture__comments').textContent = data.comments.length;
-  randomPhoto.dataset.indexId = data.id;
+  randomPhoto.dataset.id = data.id;
   return sampleClone;
 };
 
