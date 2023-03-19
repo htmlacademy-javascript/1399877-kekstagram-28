@@ -9,6 +9,8 @@ const commentsList = displayingWindow.querySelector('.social__comments');
 const commentTemplate = displayingWindow.querySelector('.social__comment').cloneNode(true);
 const descriptionPhoto = displayingWindow.querySelector('.social__caption');
 
+let photos = [];
+
 const addClass = ()=>{
   const socialCommentCount = displayingWindow.querySelector('.social__comment-count');
   const commentsLoader = displayingWindow.querySelector('.comments-loader');
