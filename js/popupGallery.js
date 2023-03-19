@@ -5,7 +5,8 @@ const closeBigPhoto = displayingWindow.querySelector('.big-picture__cancel');
 const bigPicture = displayingWindow.querySelector('.big-picture__img img');
 const likesCounter = displayingWindow.querySelector('.likes-count');
 const commentCount = displayingWindow.querySelector('.comments-count');
-const commentsList = displayingWindow.querySelectorAll('.social__comments li');
+const commentsList = displayingWindow.querySelector('.social__comments');
+const commentTemplate = displayingWindow.querySelector('.social__comment').cloneNode(true);
 const descriptionPhoto = displayingWindow.querySelector('.social__caption');
 
 const addClass = ()=>{
