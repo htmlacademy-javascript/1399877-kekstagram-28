@@ -25,8 +25,6 @@ const hidePopup = (e) => {
 };
 
 const addComments = (comments) => {
-  displayingWindow.querySelector('.social__comment-count').classList.add('hidden');
-  displayingWindow.querySelector('.comments-loader').classList.add('hidden');
   commentsList.innerHTML = '';
   commentCount.textContent = comments.length;
 
@@ -67,6 +65,8 @@ const showPopup = (event) => {
 const setPhotos = (data) => {
   photos = data;
 };
-
+displayingWindow.querySelector('.social__comment-count').classList.add('hidden');
+displayingWindow.querySelector('.comments-loader').classList.add('hidden');
 picturesContainer.addEventListener('click', showPopup);
+
 export { setPhotos };
