@@ -11,8 +11,9 @@ const commentsList = displayingWindow.querySelector('.social__comments');
 const commentTemplate = displayingWindow.querySelector('.social__comment').cloneNode(true);
 const commentLoader = displayingWindow.querySelector('.social__comments-loader');
 const showComments = displayingWindow.querySelector('.social__comment-count');
-let photos = [];
 
+let photos = [];
+let laodNext;
 const descriptionPhoto = displayingWindow.querySelector('.social__caption');
 
 
@@ -26,6 +27,7 @@ const hidePopup = (e) => {
   document.removeEventListener('keydown', hidePopup);
   document.body.classList.remove('modal-open');
   commentLoader.classList.remove('hidden');
+  commentLoader.removeEventListener('click', laodNext);
 };
 
 const addComments = (comments) => {
@@ -33,7 +35,7 @@ const addComments = (comments) => {
   commentCount.textContent = comments.length;
   let start = 0;
 
-  const laodNext = ()=>{
+  laodNext = ()=>{
     const end = start + COUNT_ON_PAGE;
     const partComments = comments.slice(start,end);
 
