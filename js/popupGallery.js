@@ -1,5 +1,7 @@
 import {picturesContainer} from './renderingPicture.js';
 
+const COUNT_ON_PAGE = 5;
+
 const displayingWindow = document.querySelector('.big-picture');
 const closeBigPhoto = displayingWindow.querySelector('.big-picture__cancel');
 const bigPicture = displayingWindow.querySelector('.big-picture__img img');
@@ -10,8 +12,6 @@ const commentTemplate = displayingWindow.querySelector('.social__comment').clone
 const commentLoader = displayingWindow.querySelector('.social__comments-loader');
 const showComments = displayingWindow.querySelector('.social__comment-count');
 let photos = [];
-
-const COUNT_ON_PAGE = 5;
 
 const descriptionPhoto = displayingWindow.querySelector('.social__caption');
 
@@ -33,7 +33,7 @@ const addComments = (comments) => {
   commentCount.textContent = comments.length;
   let start = 0;
 
-  const LaodNext = ()=>{
+  const laodNext = ()=>{
     const end = start + COUNT_ON_PAGE;
     const partComments = comments.slice(start,end);
 
@@ -52,14 +52,14 @@ const addComments = (comments) => {
 
     if(end >= comments.length){
       commentLoader.classList.add('hidden');
-      commentLoader.removeEventListener('click', LaodNext);
+      commentLoader.removeEventListener('click', laodNext);
     }else {
       commentLoader.classList.remove('hidden');
-      commentLoader.addEventListener('click', LaodNext);
+      commentLoader.addEventListener('click', laodNext);
     }
     start = end;
   };
-  LaodNext();
+  laodNext();
 };
 
 
@@ -81,7 +81,6 @@ const showPopup = (event) => {
   if (!photoData) {
     return;
   }
-  console.log(photoData)
   setPhotoData(photoData);
   displayingWindow.classList.remove('hidden');
   closeBigPhoto.addEventListener('click', hidePopup);
