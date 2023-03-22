@@ -27,7 +27,6 @@ const hidePopup = (e) => {
   document.removeEventListener('keydown', hidePopup);
   document.body.classList.remove('modal-open');
   commentLoader.classList.remove('hidden');
-  commentLoader.removeEventListener('click', laodNext);
 };
 
 const addComments = (comments) => {
