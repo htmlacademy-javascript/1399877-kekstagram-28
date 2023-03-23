@@ -12,6 +12,7 @@ const commentTemplate = displayingWindow.querySelector('.social__comment').clone
 const commentLoader = displayingWindow.querySelector('.social__comments-loader');
 const showComments = displayingWindow.querySelector('.social__comment-count');
 
+
 let photos = [];
 let laodNext;
 const descriptionPhoto = displayingWindow.querySelector('.social__caption');
@@ -73,12 +74,11 @@ const setPhotoData = (photo) => {
 };
 
 const showPopup = (event) => {
-  event.preventDefault();
   const photoId = parseInt(event.target.closest('[data-id]')?.dataset.id, 10);
   if (!photoId) {
     return;
   }
-
+  event.preventDefault();
   const photoData = photos.find((photo) => photo.id === photoId);
   if (!photoData) {
     return;
