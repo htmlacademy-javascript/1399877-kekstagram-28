@@ -7,11 +7,12 @@ const filtersForm = picturesContainer.querySelector('.img-upload__overlay');
 const battonHideFiltorsForm = filtersForm.querySelector('.img-upload__cancel');
 const inputTag = filtersForm.querySelector('.text__hashtags');
 const inputComment = filtersForm.querySelector('.text__description');
+const imgUploadSubmit = imgUploadForm.querySelector('.img-upload__submit');
 
 const pristine = new Pristine(imgUploadForm,{
-  classTo: '.img-upload__field-wrapper',
-  errorTextParent: '.img-upload__field-wrapper',
-  errorTextClass: '.img-upload__field-wrapper',
+  classTo: 'img-upload__field-wrapper',
+  errorTextParent: 'img-upload__field-wrapper',
+  errorTextClass: 'img-upload__field-wrapper',
 });
 const focusForms = (evt)=>{
   if(evt.key === 'Escape'){
@@ -20,7 +21,7 @@ const focusForms = (evt)=>{
 };
 const isValidateTag = (tag)=> VALID_SYMBOLS.test(tag);
 const isUniqueValue = (tags) =>{
-  const tagsTolowerCase = tags.map((tag) => tag.tagsTolowerCase());
+  const tagsTolowerCase = tags.map((tag) => tag.toLowerCase());
   return tagsTolowerCase.length === new Set(tagsTolowerCase).size;
 };
 const isLengthTag = (tag) => tag.length <= 5;
@@ -60,7 +61,16 @@ const showModal = ()=>{
   inputTag.addEventListener('keydown',focusForms);
   inputComment.addEventListener('keydown',focusForms);
 };
+const onFormSubmit = (evt)=>{
+  evt.preventDefault();
+  pristine.validate();
+};
 
 fileFild.addEventListener('change',showModal);
+imgUploadSubmit.addEventListener('submit', onFormSubmit);
 
-
+imgUploadForm.addEventListener('submit', (e) => {
+  if (!pristine.validate()) {
+    e.preventDefault();
+  }
+});
