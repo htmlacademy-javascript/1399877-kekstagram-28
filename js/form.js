@@ -1,4 +1,5 @@
 import {picturesContainer} from './renderingPicture.js';
+import {onClickHandler, offClickHandler} from './photoSize.js';
 
 const VALID_SYMBOLS = /^#[a-zа-яё0-9]{1,19}$/i;
 const imgUploadForm = document.querySelector('.img-upload__form');
@@ -50,6 +51,7 @@ const hideModal = (e) => {
   inputTag.removeEventListener('keydown',focusForms);
   inputComment.removeEventListener('keydown',focusForms);
   imgUploadForm.reset();
+  offClickHandler();
 };
 
 const showModal = ()=>{
@@ -59,6 +61,7 @@ const showModal = ()=>{
   document.addEventListener('keydown',hideModal);
   inputTag.addEventListener('keydown',focusForms);
   inputComment.addEventListener('keydown',focusForms);
+  onClickHandler();
 };
 
 fileFild.addEventListener('change',showModal);
