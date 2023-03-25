@@ -10,9 +10,8 @@ const inputTag = filtersForm.querySelector('.text__hashtags');
 const inputComment = filtersForm.querySelector('.text__description');
 
 const pristine = new Pristine(imgUploadForm,{
-  classTo: '.img-upload__field-wrapper',
-  errorTextParent: '.img-upload__field-wrapper',
-  errorTextClass: '.img-upload__field-wrapper',
+  classTo: 'img-upload__field-wrapper',
+  errorTextParent: 'img-upload__field-wrapper',
 });
 const focusForms = (evt)=>{
   if(evt.key === 'Escape'){
