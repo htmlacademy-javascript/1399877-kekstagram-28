@@ -1,5 +1,6 @@
 import {picturesContainer} from './renderingPicture.js';
-import {onClickHandler, offClickHandler} from './photoSize.js';
+import {onClickHandler, offClickHandler} from './photoScale.js';
+import {resetEffect} from './photoFilters.js';
 
 const VALID_SYMBOLS = /^#[a-zа-яё0-9]{1,19}$/i;
 const imgUploadForm = document.querySelector('.img-upload__form');
@@ -8,10 +9,12 @@ const filtersForm = picturesContainer.querySelector('.img-upload__overlay');
 const battonHideFiltorsForm = filtersForm.querySelector('.img-upload__cancel');
 const inputTag = filtersForm.querySelector('.text__hashtags');
 const inputComment = filtersForm.querySelector('.text__description');
+const imgUploadSubmit = imgUploadForm.querySelector('.img-upload__submit');
 
 const pristine = new Pristine(imgUploadForm,{
   classTo: 'img-upload__field-wrapper',
   errorTextParent: 'img-upload__field-wrapper',
+  errorTextClass: 'img-upload__field-wrapper',
 });
 const focusForms = (evt)=>{
   if(evt.key === 'Escape'){
@@ -20,7 +23,7 @@ const focusForms = (evt)=>{
 };
 const isValidateTag = (tag)=> VALID_SYMBOLS.test(tag);
 const isUniqueValue = (tags) =>{
-  const tagsTolowerCase = tags.map((tag) => tag.tagsTolowerCase());
+  const tagsTolowerCase = tags.map((tag) => tag.toLowerCase());
   return tagsTolowerCase.length === new Set(tagsTolowerCase).size;
 };
 const isLengthTag = (tag) => tag.length <= 5;
@@ -36,7 +39,7 @@ const validateTags = (value)=>{
 pristine.addValidator(
   inputTag,
   validateTags,
-  'ХешТаг не соответствует требованиям',
+  'Хэштаг не соответствует требованиям',
 );
 const hideModal = (e) => {
   if (e.key && e.key !== 'Escape') {
@@ -49,7 +52,9 @@ const hideModal = (e) => {
   battonHideFiltorsForm.removeEventListener('keydown',hideModal);
   inputTag.removeEventListener('keydown',focusForms);
   inputComment.removeEventListener('keydown',focusForms);
+
   imgUploadForm.reset();
+  resetEffect();
   offClickHandler();
 };
 
@@ -62,7 +67,16 @@ const showModal = ()=>{
   inputComment.addEventListener('keydown',focusForms);
   onClickHandler();
 };
+const onFormSubmit = (evt)=>{
+  evt.preventDefault();
+  pristine.validate();
+};
 
 fileFild.addEventListener('change',showModal);
+imgUploadSubmit.addEventListener('submit', onFormSubmit);
 
-
+imgUploadForm.addEventListener('submit', (e) => {
+  if (!pristine.validate()) {
+    e.preventDefault();
+  }
+});

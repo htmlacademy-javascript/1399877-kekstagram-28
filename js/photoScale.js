@@ -1,7 +1,10 @@
+const SCALE_STEP = 25;
+
 const SmallerScale = document.querySelector('.scale__control--smaller');
 const BiggerScale = document.querySelector('.scale__control--bigger');
 const scaleValue = document.querySelector('.scale__control--value');
 const uploadImg = document.querySelector('.img-upload__preview');
+
 
 const addValueScalePhoto = ()=> parseInt(scaleValue.value, 10);
 
@@ -9,10 +12,10 @@ const decreaseValueScale = (evt)=>{
   evt.preventDefault();
   let valueScalle = addValueScalePhoto();
 
-  if(valueScalle <= 25){
+  if(valueScalle <= SCALE_STEP){
     return;
   }
-  valueScalle -= 25;
+  valueScalle -= SCALE_STEP;
   scaleValue.value = `${valueScalle}%`;
   const style = `transform: scale(${valueScalle / 100})`;
   uploadImg.style = style;
@@ -25,7 +28,7 @@ const increaseValueScale = (evt)=>{
 
     return;
   }
-  valueScalle += 25;
+  valueScalle += SCALE_STEP;
   scaleValue.value = `${valueScalle}%`;
   const style = `transform: scale(${valueScalle / 100})`;
   uploadImg.style = style;
