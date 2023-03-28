@@ -1,9 +1,9 @@
 import {createPhotos} from './mockPhotos.js';
-import {renderPhotos} from './renderingPicture.js';
-import { setPhotos} from './popupGallery.js';
+import {renderPhotos} from './rendering-picture.js';
+import { setPhotos} from './popup-gallery.js';
 import './form.js';
-import './photoScale.js';
-import './photoFilters.js';
+import './photo-scale.js';
+import './photo-filters.js';
 
 const photos = createPhotos();
 renderPhotos(photos);

@@ -1,6 +1,6 @@
-import {picturesContainer} from './renderingPicture.js';
-import {onClickHandler, offClickHandler} from './photoScale.js';
-import {resetEffect} from './photoFilters.js';
+import {picturesContainer} from './rendering-picture.js';
+import {onClickHandler, offClickHandler,resetScalleValue} from './photo-scale.js';
+import {resetEffect} from './photo-filters.js';
 
 const VALID_SYMBOLS = /^#[a-zа-яё0-9]{1,19}$/i;
 const imgUploadForm = document.querySelector('.img-upload__form');
@@ -55,6 +55,7 @@ const hideModal = (e) => {
 
   imgUploadForm.reset();
   resetEffect();
+  resetScalleValue();
   offClickHandler();
 };
 
