@@ -81,3 +81,5 @@ imgUploadForm.addEventListener('submit', (e) => {
     e.preventDefault();
   }
 });
+
+export{imgUploadForm,hideModal};
