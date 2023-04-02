@@ -5,14 +5,14 @@ const load = () =>
     .then((response) => response.json())
     .catch(()=>{});
 
-const setSubmit = (data)=>
+const setSubmit = (data,hide)=>{
   fetch(
     URL,
     {
       method: 'POST',
       body: data,
     }
-  );
-
+  ).then(() => hide());
+};
 
 export {load,setSubmit};
