@@ -42,18 +42,20 @@ pristine.addValidator(
   validateTags,
   'Хэштэг не соответствует требованиям',
 );
-
+const removeEvents = (cb) => {
+  filtersForm.classList.add('hidden');
+  document.body.classList.remove('modal-open');
+  battonHideFiltorsForm.removeEventListener('click',cb);
+  battonHideFiltorsForm.removeEventListener('keydown',cb);
+  inputTag.removeEventListener('keydown',focusForms);
+  inputComment.removeEventListener('keydown',focusForms);
+};
 const hideModal = (evt)=>{
   if (evt.key && evt.key !== 'Escape') {
     return false;
   }
   evt.preventDefault();
-  filtersForm.classList.add('hidden');
-  document.body.classList.remove('modal-open');
-  battonHideFiltorsForm.removeEventListener('click',hideModal);
-  battonHideFiltorsForm.removeEventListener('keydown',hideModal);
-  inputTag.removeEventListener('keydown',focusForms);
-  inputComment.removeEventListener('keydown',focusForms);
+  removeEvents(hideModal);
 
   imgUploadForm.reset();
   resetEffect();
@@ -78,23 +80,15 @@ const onFormSubmit = (evt)=>{
 fileFild.addEventListener('change',showModal);
 imgUploadSubmit.addEventListener('submit', onFormSubmit);
 
-// imgUploadForm.addEventListener('submit', (e) => {
-//   if (!pristine.validate()) {
-//     e.preventDefault();
-//   }
-// });
-const setUserFormSubmit = (setForm,show)=>{
-  imgUploadForm.addEventListener('submit', (evt) => {
-    evt.preventDefault();
-    const isValidate = pristine.validate();
-    if (isValidate){
-      console.log(true);
-      const formData = new FormData(evt.target);
-      setForm(formData,show);
-    }else{
-      console.log(false)
-    }
-  });
-};
 
-export{setUserFormSubmit,hideModal};
+const setUserFormSubmit = (setForm) => setForm();
+
+imgUploadForm.addEventListener('submit', (evt) => {
+  evt.preventDefault();
+  const isValidate = pristine.validate();
+  if (isValidate){
+    const formData = new FormData(evt.target);
+    // setForm(formData).then(removeEvents);
+  }
+});
+export{setUserFormSubmit};

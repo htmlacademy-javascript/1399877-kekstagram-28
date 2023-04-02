@@ -11,8 +11,7 @@ const showAlert = (message)=>{
       document.body.removeChild(el);
       response();
     });
-  }).then(()=>{
-    console.log(1);
   });
 };
+
 export{showAlert};

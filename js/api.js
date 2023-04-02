@@ -1,18 +1,20 @@
 const URL = 'https://28.javascript.pages.academy/kekstagram';
 
-const load = () =>
+const load = async () =>
   fetch(`${URL}/data`)
     .then((response) => response.json())
-    .catch(()=>{});
+    .catch((reject)=> reject());
 
-const setSubmit = (data,hide)=>{
+const setSubmit = async (data) => {
+
   fetch(
     URL,
     {
       method: 'POST',
       body: data,
-    }
-  ).then(() => hide());
+    })
+    .then()
+    .catch();
 };
 
 export {load,setSubmit};
