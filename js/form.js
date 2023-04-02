@@ -88,7 +88,6 @@ imgUploadForm.addEventListener('submit', (evt) => {
   const isValidate = pristine.validate();
   if (isValidate){
     const formData = new FormData(evt.target);
-    // setForm(formData).then(removeEvents);
   }
 });
 export{setUserFormSubmit};
