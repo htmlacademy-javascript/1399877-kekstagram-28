@@ -6,7 +6,6 @@ import { showAlert } from './alert.js';
 import './photo-scale.js';
 import './photo-filters.js';
 
-
 const photos = await load();
 
 renderPhotos(photos);
