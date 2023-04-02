@@ -3,6 +3,7 @@ import {onClickHandler, offClickHandler,resetScalleValue} from './photo-scale.js
 import {resetEffect} from './photo-filters.js';
 
 const VALID_SYMBOLS = /^#[a-zа-яё0-9]{1,19}$/i;
+
 const imgUploadForm = document.querySelector('.img-upload__form');
 const fileFild = picturesContainer.querySelector('.img-upload__input');
 const filtersForm = picturesContainer.querySelector('.img-upload__overlay');
@@ -41,15 +42,21 @@ pristine.addValidator(
   validateTags,
   'Хэштаг не соответствует требованиям',
 );
-const hideModal = (e) => {
-  if (e.key && e.key !== 'Escape') {
+
+const hideModal = ()=>{
+  const isKey = (evt) => {
+    if (evt.key && evt.key !== 'Escape') {
+      return false;
+    }
+    evt.preventDefault();
+  };
+  if(isKey){
     return;
   }
   filtersForm.classList.add('hidden');
-  e.preventDefault();
   document.body.classList.remove('modal-open');
-  battonHideFiltorsForm.removeEventListener('click',hideModal);
-  battonHideFiltorsForm.removeEventListener('keydown',hideModal);
+  battonHideFiltorsForm.removeEventListener('click',isKey);
+  battonHideFiltorsForm.removeEventListener('keydown',isKey);
   inputTag.removeEventListener('keydown',focusForms);
   inputComment.removeEventListener('keydown',focusForms);
 
@@ -76,10 +83,20 @@ const onFormSubmit = (evt)=>{
 fileFild.addEventListener('change',showModal);
 imgUploadSubmit.addEventListener('submit', onFormSubmit);
 
-imgUploadForm.addEventListener('submit', (e) => {
-  if (!pristine.validate()) {
-    e.preventDefault();
-  }
-});
-
-export{imgUploadForm,hideModal};
+// imgUploadForm.addEventListener('submit', (evt) => {
+//   evt.preventDefault();
+//   if (pristine.validate()) {
+//     const formData = new FormData(evt.target);
+//     Setsubmit(formData);
+//   }
+// });
+const setUserFormSubmit = (setForm)=>{
+  imgUploadForm.addEventListener('submit', (evt) => {
+    evt.preventDefault();
+    if (pristine.validate()) {
+      const formData = new FormData(evt.target);
+      setForm(formData).then(()=>console.log(0));
+    }
+  });
+};
+export{setUserFormSubmit,hideModal};
