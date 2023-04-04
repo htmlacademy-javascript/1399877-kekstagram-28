@@ -5,6 +5,7 @@ const load = async () =>
   fetch(`${URL}/data`)
     .then((response) => {
       if (response.ok) {
+        document.querySelector('.img-filters').classList.remove('img-filters--inactive');
         return response.json();
       }
       throw new Error('Данные не загрузились');
