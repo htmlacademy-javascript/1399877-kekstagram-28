@@ -1,17 +1,16 @@
-import {load,setSubmit} from './api.js';
+import {load,submit} from './api.js';
 import {renderPhotos} from './rendering-picture.js';
 import { setPhotos} from './popup-gallery.js';
-import {setUserFormSubmit} from './form.js';
-import { showAlert } from './alert.js';
+import {initSubmitForm} from './form.js';
 import './photo-scale.js';
 import './photo-filters.js';
 
 const photos = await load();
+if (photos) {
+  renderPhotos(photos);
+  setPhotos(photos);
+}
 
-renderPhotos(photos);
-setPhotos(photos);
-
-setUserFormSubmit(setSubmit);
-// setSubmit(setUserFormSubmit);
+initSubmitForm({submitData: submit});
 
 
