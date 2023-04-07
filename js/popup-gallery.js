@@ -88,8 +88,6 @@ const showPopup = (event) => {
   document.addEventListener('keydown', hidePopup);
   document.body.classList.add('modal-open');
 };
-
-
 const setPhotos = (data) => {
   photos = data;
 };
