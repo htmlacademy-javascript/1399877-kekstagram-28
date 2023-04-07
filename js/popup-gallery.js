@@ -1,4 +1,4 @@
-import {picturesContainer} from './renderingPicture.js';
+import {picturesContainer} from './rendering-picture.js';
 
 const COUNT_ON_PAGE = 5;
 

@@ -1,7 +1,7 @@
 const SCALE_STEP = 25;
 
-const SmallerScale = document.querySelector('.scale__control--smaller');
-const BiggerScale = document.querySelector('.scale__control--bigger');
+const smallerScale = document.querySelector('.scale__control--smaller');
+const biggerScale = document.querySelector('.scale__control--bigger');
 const scaleValue = document.querySelector('.scale__control--value');
 const uploadImg = document.querySelector('.img-upload__preview');
 
@@ -34,12 +34,18 @@ const increaseValueScale = (evt)=>{
   uploadImg.style = style;
 };
 const onClickHandler = ()=>{
-  SmallerScale.addEventListener('click', decreaseValueScale);
-  BiggerScale.addEventListener('click', increaseValueScale);
+  smallerScale.addEventListener('click', decreaseValueScale);
+  biggerScale.addEventListener('click', increaseValueScale);
 };
 const offClickHandler = ()=>{
-  SmallerScale.removeEventListener('click', decreaseValueScale);
-  BiggerScale.removeEventListener('click', increaseValueScale);
+  smallerScale.removeEventListener('click', decreaseValueScale);
+  biggerScale.removeEventListener('click', increaseValueScale);
 };
-export {onClickHandler, offClickHandler};
+const resetScalleValue = ()=>{
+  const VALUE_SCALLE = 100;
+  scaleValue.value = `${VALUE_SCALLE}%`;
+  const style = `transform: scale(${VALUE_SCALLE / 100})`;
+  uploadImg.style = style;
+};
+export {onClickHandler, offClickHandler,resetScalleValue};
 

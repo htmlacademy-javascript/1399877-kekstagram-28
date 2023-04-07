@@ -1,11 +1,17 @@
-import {createPhotos} from './mockPhotos.js';
-import {renderPhotos} from './renderingPicture.js';
-import { setPhotos} from './popupGallery.js';
-import './form.js';
-import './photoScale.js';
-import './photoFilters.js';
+import {load,submit} from './api.js';
+import {renderPhotos} from './rendering-picture.js';
+import { setPhotos} from './popup-gallery.js';
+import {initSubmitForm} from './form.js';
+import './photo-scale.js';
+import './photo-filters.js';
+import './avatar.js';
 
-const photos = createPhotos();
-renderPhotos(photos);
-setPhotos(photos);
+const photos = await load();
+if (photos) {
+  renderPhotos(photos);
+  setPhotos(photos);
+}
+
+initSubmitForm({submitData: submit});
+
 
