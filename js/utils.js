@@ -11,6 +11,18 @@ const createIdGenerator = () => {
     return lastGeneratedId;
   };
 };
+function debounce (callback, timeoutDelay = 500) {
 
-const getRandomArrayElement = (array) => array[getRandomPositiveInteger(0, array.length - 1)];
-export{getRandomPositiveInteger,createIdGenerator, getRandomArrayElement};
+  let timeoutId;
+
+  return (...rest) => {
+
+    clearTimeout(timeoutId);
+
+    timeoutId = setTimeout(() => callback.apply(this, rest), timeoutDelay);
+
+  };
+}
+
+
+export{getRandomPositiveInteger,createIdGenerator, debounce};

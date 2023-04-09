@@ -1,7 +1,5 @@
-import {picturesContainer} from './rendering-picture.js';
-
 const COUNT_ON_PAGE = 5;
-
+const picturesContainer = document.querySelector('.pictures');
 const displayingWindow = document.querySelector('.big-picture');
 const closeBigPhoto = displayingWindow.querySelector('.big-picture__cancel');
 const bigPicture = displayingWindow.querySelector('.big-picture__img img');
