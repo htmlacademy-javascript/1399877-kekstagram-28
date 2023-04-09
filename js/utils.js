@@ -11,6 +11,7 @@ const createIdGenerator = () => {
     return lastGeneratedId;
   };
 };
+
 function debounce (callback, timeoutDelay = 500) {
 
   let timeoutId;
