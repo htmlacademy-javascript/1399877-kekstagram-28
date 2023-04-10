@@ -1,4 +1,4 @@
-const showError = () => new Promise((response) => {
+const showError = (message) => new Promise((response) => {
   const popup = document.querySelector('#error').content.cloneNode(true).querySelector('.error');
   const close = (e) => {
     if (e?.key && e.key !== 'Escape') {
@@ -11,6 +11,11 @@ const showError = () => new Promise((response) => {
     response();
   };
   popup.querySelector('.error__button').addEventListener('click', close);
+
+  if(message){
+    popup.querySelector('.error__title').textContent = message;
+  }
+
   popup.addEventListener('click', (e) => {
     if (e.target === popup) {
       close();

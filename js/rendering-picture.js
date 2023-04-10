@@ -29,7 +29,7 @@ const renderPhotos = (photos) => {
   photos.forEach((photo) => fragment.appendChild(createPicture(photo)));
 
   picturesContainer.appendChild(fragment);
-  setPhotos();
+  setPhotos(photos);
 };
 
 export {renderPhotos, picturesContainer};

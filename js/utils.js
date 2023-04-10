@@ -4,13 +4,6 @@ const getRandomPositiveInteger = (a, b) =>{
   const result = Math.random() * (upper - lower + 1) + lower;
   return Math.floor(result);
 };
-const createIdGenerator = () => {
-  let lastGeneratedId = 0;
-  return function (){
-    lastGeneratedId += 1;
-    return lastGeneratedId;
-  };
-};
 
 function debounce (callback, timeoutDelay = 500) {
 
@@ -26,4 +19,4 @@ function debounce (callback, timeoutDelay = 500) {
 }
 
 
-export{getRandomPositiveInteger,createIdGenerator, debounce};
+export{getRandomPositiveInteger, debounce};
