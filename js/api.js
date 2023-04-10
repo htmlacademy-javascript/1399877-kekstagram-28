@@ -22,13 +22,13 @@ const submit = async (data) =>
     })
     .then((response) => {
       if (response.ok) {
-        showAlert('Данные успешно отправились!'); // Это заменить на показ формы успешной отправки
+        showAlert('Данные успешно отправились!');
         return Promise.resolve();
       }
       throw new Error('Данные не отправились');
     })
     .catch((reason) => {
-      showError(reason.message); // Это заменить на показ формы неуспешной отправки
+      showError(reason.message);
       return Promise.reject(reason.message);
     });
 
