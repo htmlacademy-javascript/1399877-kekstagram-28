@@ -71,12 +71,14 @@ const setPhotoData = (photo) => {
 };
 
 const showPopup = (event) => {
-  const photoId = parseInt(event.target.closest('[data-id]')?.dataset.id, 10);
-  if (!photoId) {
+  const photoId = event.target.closest('[data-id]')?.dataset.id;
+  if (photoId === undefined) {
     return;
   }
   event.preventDefault();
-  const photoData = photos.find((photo) => photo.id === photoId);
+
+  event.preventDefault();
+  const photoData = photos.find((photo) => photo.id === +photoId);
   if (!photoData) {
     return;
   }

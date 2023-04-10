@@ -73,6 +73,7 @@ const initSubmitForm = ({submitData}) => {
     inputTag.addEventListener('keydown', focusForms);
     inputComment.addEventListener('keydown', focusForms);
     onClickHandler();
+    pristine.validate();
   };
 
   let isProcessing = false;
