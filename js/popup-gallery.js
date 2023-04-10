@@ -77,7 +77,6 @@ const showPopup = (event) => {
   }
   event.preventDefault();
 
-  event.preventDefault();
   const photoData = photos.find((photo) => photo.id === +photoId);
   if (!photoData) {
     return;
